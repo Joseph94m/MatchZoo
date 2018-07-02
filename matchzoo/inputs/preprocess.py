@@ -490,7 +490,7 @@ def _test_hist():
 if __name__ == '__main__':
     #_test_ngram()
     # test with sample data
-    basedir = '../../data/example/ranking/'
+    basedir = '../../data/WikiQA/WikiQACorpus/'
     prepare = Preparation()
     sample_file = basedir + 'sample.txt'
     corpus, rels = prepare.run_with_one_corpus(sample_file)

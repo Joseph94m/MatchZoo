@@ -262,7 +262,7 @@ class Preparation(object):
 
 if __name__ == '__main__':
     prepare = Preparation()
-    basedir = '../../data/example/ranking/'
+    basedir = '../../data/WikiQA/WikiQACorpus/'
     corpus, rels = prepare.run_with_one_corpus(basedir + 'sample.txt')
     print('total corpus : %d ...' % (len(corpus)))
     print('total relations : %d ...' % (len(rels)))

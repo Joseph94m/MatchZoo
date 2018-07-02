@@ -1,8 +1,8 @@
 This directory contains all the text matching models. All the models should be based on the `BasicModel` from model.py. And anyone can write their own text matching model just as the arci.py.
 
 
-Each model is correspong with a configuration file, which aims to specify the parameters in the model. The example config file can be found in "examples/toy_example/config/".
-The configuration file is in json format. It will be depicted in details as follows,
+Each model corresponds to a configuration file, which aims to specify the parameters in the model. The example config file can be found in "examples/toy_example/config/".
+The configuration file is in json format. It will be depicted in detail as follows:
 1. "net_name" can be set to any names as you like.
 2. "global" contains some global parameters for training and predicting.
     1). "model_type": is can be "PY" or "json", as the keras can load model from python file or json file. Here, we use "PY" most of the time as the model is defined in current directory.

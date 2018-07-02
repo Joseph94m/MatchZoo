@@ -2,12 +2,15 @@
 *.log
 *.swp
 *.bak
-*.weights
 *.trec
 *.ranklist
 *.DS_Store
 *.coverage
 predict.*
+**/WikiQA
+**/toy-example
+**/QuoraQP
+**/wikiqa
 build/
 dist/
 log/*
