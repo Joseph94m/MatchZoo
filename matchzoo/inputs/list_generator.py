@@ -77,10 +77,10 @@ class ListGenerator(ListBasicGenerator):
             bsize = sum([len(pt[1]) for pt in currbatch])
             ID_pairs = []
             list_count = [0]
-            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.int32)
-            X1_len = np.zeros((bsize,), dtype=np.int32)
-            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.int32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
+            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.float32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
+            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.float32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
             Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             X2[:] = self.fill_word
@@ -120,11 +120,11 @@ class ListGenerator(ListBasicGenerator):
 
             bsize = sum([len(pt[1]) for pt in currbatch])
             list_count = [0]
-            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.int32)
-            X1_len = np.zeros((bsize,), dtype=np.int32)
-            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.int32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.float32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
+            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.float32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             X2[:] = self.fill_word
             j = 0
@@ -193,7 +193,7 @@ class Triletter_ListGenerator(ListBasicGenerator):
 
     def transfer_feat2fixed(self, feats, max_len, fill_val):
         num_feat = len(feats)
-        nfeat = np.zeros((num_feat, max_len), dtype=np.int32)
+        nfeat = np.zeros((num_feat, max_len), dtype=np.float32)
         nfeat[:] = fill_val
         for i in range(num_feat):
             rlen = min(max_len, len(feats[i]))
@@ -212,9 +212,9 @@ class Triletter_ListGenerator(ListBasicGenerator):
             bsize = sum([len(pt[1]) for pt in currbatch])
             ID_pairs = []
             list_count = [0]
-            X1_len = np.zeros((bsize,), dtype=np.int32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1, X2 = [], []
             j = 0
             for pt in currbatch:
@@ -255,9 +255,9 @@ class Triletter_ListGenerator(ListBasicGenerator):
                 self.point = self.num_list
             bsize = sum([len(pt[1]) for pt in currbatch])
             list_count = [0]
-            X1_len = np.zeros((bsize,), dtype=np.int32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1, X2 = [], []
             j = 0
             for pt in currbatch:
@@ -348,11 +348,11 @@ class DRMM_ListGenerator(ListBasicGenerator):
             bsize = sum([len(pt[1]) for pt in currbatch])
             list_count = [0]
             ID_pairs = []
-            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.int32)
-            X1_len = np.zeros((bsize,), dtype=np.int32)
+            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.float32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
             X2 = np.zeros((bsize, self.data1_maxlen, self.hist_size), dtype=np.float32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             j = 0
             for pt in currbatch:
@@ -385,11 +385,11 @@ class DRMM_ListGenerator(ListBasicGenerator):
                 self.point = self.num_list
             bsize = sum([len(pt[1]) for pt in currbatch])
             list_count = [0]
-            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.int32)
-            X1_len = np.zeros((bsize,), dtype=np.int32)
+            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.float32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
             X2 = np.zeros((bsize, self.data1_maxlen, self.hist_size), dtype=np.float32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             X2[:] = self.fill_word
             j = 0
@@ -449,13 +449,13 @@ class ListGenerator_Feats(ListBasicGenerator):
             bsize = sum([len(pt[1]) for pt in currbatch])
             list_count = [0]
             ID_pairs = []
-            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.int32)
-            X1_len = np.zeros((bsize,), dtype=np.int32)
-            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.int32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
+            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.float32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
+            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.float32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
             X3 = np.zeros((bsize, self.pair_feat_size), dtype=np.float32)
             X4 = np.zeros((bsize, self.query_feat_size), dtype=np.float32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             X2[:] = self.fill_word
             j = 0
@@ -491,13 +491,13 @@ class ListGenerator_Feats(ListBasicGenerator):
                 self.point = self.num_list
             bsize = sum([len(pt[1]) for pt in currbatch])
             list_count = [0]
-            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.int32)
-            X1_len = np.zeros((bsize,), dtype=np.int32)
-            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.int32)
-            X2_len = np.zeros((bsize,), dtype=np.int32)
+            X1 = np.zeros((bsize, self.data1_maxlen), dtype=np.float32)
+            X1_len = np.zeros((bsize,), dtype=np.float32)
+            X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.float32)
+            X2_len = np.zeros((bsize,), dtype=np.float32)
             X3 = np.zeros((bsize, self.pair_feat_size), dtype=np.float32)
             X4 = np.zeros((bsize, self.query_feat_size), dtype=np.float32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             X2[:] = self.fill_word
             j = 0
