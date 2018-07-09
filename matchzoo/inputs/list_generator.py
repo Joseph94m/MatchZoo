@@ -81,7 +81,7 @@ class ListGenerator(ListBasicGenerator):
             X1_len = np.zeros((bsize,), dtype=np.int32)
             X2 = np.zeros((bsize, self.data2_maxlen), dtype=np.int32)
             X2_len = np.zeros((bsize,), dtype=np.int32)
-            Y = np.zeros((bsize,), dtype= np.int32)
+            Y = np.zeros((bsize,), dtype= np.float32)
             X1[:] = self.fill_word
             X2[:] = self.fill_word
             j = 0
