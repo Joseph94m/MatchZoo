@@ -9,56 +9,57 @@ python gen_hist4drmm.py 60 corpus_preprocessed.txt embed_glove_d300_norm
 python gen_binsum4anmm.py 20 corpus_preprocessed.txt embed_glove_d300_norm
 
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/dssm_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/dssm_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/dssm_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/dssm_Robust.config
 [06-21-2018 10:10:42]   [Predict] @ predict [Predict] results:  ndcg@3=0.534027 ndcg@5=0.603492 map=0.552497
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/cdssm_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/cdssm_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/cdssm_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/cdssm_Robust.config
 [06-21-2018 10:09:18]   [Predict] @ predict [Predict] results:  ndcg@3=0.362195 ndcg@5=0.442631 map=0.392363
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/arci_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/arci_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/arci_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/arci_Robust.config
 [06-20-2018 19:19:53]   [Predict] @ predict [Predict] results:  ndcg@3=0.550177 ndcg@5=0.630232 map=0.580298
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/arcii_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/arcii_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/arcii_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/arcii_Robust.config
 [06-20-2018 23:13:31]   [Predict] @ predict [Predict] results:  ndcg@3=0.506096 ndcg@5=0.572237 map=0.536097
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/mvlstm_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/mvlstm_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/mvlstm_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/mvlstm_Robust.config
 [06-21-2018 10:16:29]   [Predict] @ predict [Predict] results:  ndcg@3=0.602119 ndcg@5=0.657307 map=0.618489
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/drmm_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/drmm_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/drmm_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/drmm_Robust.config
 [06-20-2018 19:34:21]   [Predict] @ predict [Predict] results:  ndcg@3=0.585041 ndcg@5=0.642212 map=0.605119
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/knrm_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/knrm_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/knrm_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/knrm_Robust.config
 [06-21-2018 09:54:21]   [Predict] @ predict [Predict] results:  ndcg@3=0.488187 ndcg@5=0.544014 map=0.509605
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/anmm_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/anmm_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/anmm_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/anmm_Robust.config
 [06-21-2018 10:10:18]   [Predict] @ predict [Predict] results:  ndcg@3=0.608267 ndcg@5=0.655001 map=0.614212
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/duet_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/duet_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/duet_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/duet_Robust.config
 [06-21-2018 09:57:06]   [Predict] @ predict [Predict] results:  ndcg@3=0.594740 ndcg@5=0.638928 map=0.597437
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/matchpyramid_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/matchpyramid_wikiqa.config
-Error: Stop iteration
 
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/drmm_tks_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/drmm_tks_wikiqa.config
+
+python matchzoo\main.py --phase train --model_file examples/Robust/config/drmm_tks_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/drmm_tks_Robust.config
 [06-21-2018 09:49:54]   [Predict] @ predict [Predict] results:  ndcg@3=0.612559 ndcg@5=0.655369 map=0.6137647
 
+python matchzoo\main.py --phase train --model_file examples/Robust/config/matchpyramid_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/matchpyramid_Robust.config
+Error: Stop iteration
 
 
 
 with terrier data: all documents even non relevant ones: doc size 20
-python matchzoo\main.py --phase train --model_file examples/wikiqa/config/arci_wikiqa.config
-python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/arci_wikiqa.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/arci_Robust.config
+python matchzoo\main.py --phase predict --model_file examples/Robust/config/arci_Robust.config
 [06-26-2018 14:45:15]   [Predict] @ predict [Predict] results:  ndcg@3=0.027815 ndcg@5=0.033307 map=0.055734
 
 
