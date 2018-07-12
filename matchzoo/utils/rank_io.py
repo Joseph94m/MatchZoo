@@ -41,6 +41,7 @@ def read_data_old_version(filename):
     return data
 
 
+
 # Read Relation Data
 def read_relation(filename, verbose=True):
     data = []
