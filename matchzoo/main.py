@@ -175,7 +175,7 @@ def train(config):
                         res[k] += eval_func(y_true = y_true, y_pred = y_pred)
                     num_valid += 1
             generator.reset()
-            print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/num_valid) for k, v in res.items()])), end='\n')
+            print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/(num_valid+0.001)) for k, v in res.items()] )), end='\n')
             sys.stdout.flush()
         if (i_e+1) % save_weights_iters == 0:
             model.save_weights(weights_file % (i_e+1))
@@ -272,7 +272,6 @@ def predict(config):
                         pre = list_counts[lc_idx]
                         suf = list_counts[lc_idx+1]
                         res[k] += eval_func(y_true = y_true[pre:suf], y_pred = y_pred[pre:suf])
-
                 y_pred = np.squeeze(y_pred)
                 for lc_idx in range(len(list_counts)-1):
                     pre = list_counts[lc_idx]
@@ -292,7 +291,6 @@ def predict(config):
                     res_scores[p[0]][p[1]] = (y[1], t[1])
                 num_valid += 1
         generator.reset()
-
         if tag in output_conf:
             if output_conf[tag]['save_format'] == 'TREC':
                 with open(output_conf[tag]['save_path'], 'w') as f:
