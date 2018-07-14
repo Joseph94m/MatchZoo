@@ -175,7 +175,7 @@ def train(config):
                         res[k] += eval_func(y_true = y_true, y_pred = y_pred)
                     num_valid += 1
             generator.reset()
-            print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/(num_valid+0.001)) for k, v in res.items()] )), end='\n')
+            print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/(num_valid)) for k, v in res.items()] )), end='\n')
             sys.stdout.flush()
         if (i_e+1) % save_weights_iters == 0:
             model.save_weights(weights_file % (i_e+1))
