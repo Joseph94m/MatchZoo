@@ -175,7 +175,7 @@ def train(config):
                         res[k] += eval_func(y_true = y_true, y_pred = y_pred)
                     num_valid += 1
             generator.reset()
-            print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/(num_valid)) for k, v in res.items()] )), end='\n')
+            print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/(num_valid+0.00001)) for k, v in res.items()] )), end='\n')
             sys.stdout.flush()
         if (i_e+1) % save_weights_iters == 0:
             model.save_weights(weights_file % (i_e+1))
@@ -297,6 +297,11 @@ def predict(config):
                     for qid, dinfo in res_scores.items():
                         dinfo = sorted(dinfo.items(), key=lambda d:d[1][0], reverse=True)
                         for inum,(did, (score, gt)) in enumerate(dinfo):
+                            #print(inum)
+                            #print(did)
+                            #print(qid)
+                            #print(score)
+                            #print(gt)
                             f.write('%s\tQ0\t%s\t%d\t%f\t%s\t%s\n'%(qid, did, inum, score, config['net_name'], gt))
             elif output_conf[tag]['save_format'] == 'TEXTNET':
                 with open(output_conf[tag]['save_path'], 'w') as f:

@@ -52,7 +52,7 @@ class NMWS(BasicModel):
         if self.config['target_mode'] == 'classification':
             out_ = Dense(2, activation='softmax')(psi)
         elif self.config['target_mode'] in ['regression', 'ranking']:
-            out_ = Dense(1,activation='sigmoid')(psi)
+            out_ = Dense(1)(psi)
         show_layer_info('Dense', out_)
 
         model = Model(inputs=[query, doc], outputs=out_)
