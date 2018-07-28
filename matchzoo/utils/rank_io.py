@@ -41,12 +41,13 @@ def read_data_old_version(filename):
     return data
 
 
+
 # Read Relation Data
 def read_relation(filename, verbose=True):
     data = []
     for line in open(filename):
         line = line.strip().split()
-        data.append( (int(line[0]), line[1], line[2]) )
+        data.append( (line[0], line[1], line[2]) )
     if verbose:
         print('[%s]\n\tInstance size: %s' % (filename, len(data)), end='\n')
     return data
