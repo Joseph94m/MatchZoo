@@ -150,7 +150,6 @@ def train(config):
                     genfun,
                     steps_per_epoch = display_interval,
                     epochs = 1,
-                    shuffle=False,
                     verbose = 0
                 ) #callbacks=[eval_map])
             print('Iter:%d\tloss=%.6f' % (i_e, history.history['loss'][0]), end='\n')
@@ -179,7 +178,7 @@ def train(config):
             sys.stdout.flush()
         if (i_e+1) % save_weights_iters == 0:
             model.save_weights(weights_file % (i_e+1))
-
+            model.save(weights_file % (i_e+1)+".model")
 def predict(config):
     ######## Read input config ########
 
