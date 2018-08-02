@@ -62,7 +62,6 @@ class PairBasicGenerator(object):
 
         while True:
             rel_set_sample = random.sample(rel_set.keys(), self.config['query_per_iter'])
-
             for d1 in rel_set_sample:
                 label_list = sorted(rel_set[d1].keys(), reverse = True)
                 for hidx, high_label in enumerate(label_list[:-1]):
