@@ -4,7 +4,7 @@
 from __future__ import print_function
 import json
 import numpy as np
-
+import gzip
 
 # Read Word Dict and Inverse Word Dict
 def read_word_dict(filename):
@@ -45,9 +45,14 @@ def read_data_old_version(filename):
 # Read Relation Data
 def read_relation(filename, verbose=True):
     data = []
-    for line in open(filename):
-        line = line.strip().split()
-        data.append( (line[0], line[1], line[2]) )
+    if filename.endswith('.gz'):
+        for line in gzip.open(filename):
+            line = line.strip().split()
+            data.append( (line[0], line[1], line[2]) )
+    else:
+        for line in open(filename):
+            line = line.strip().split()
+            data.append( (line[0], line[1], line[2]) )
     if verbose:
         print('[%s]\n\tInstance size: %s' % (filename, len(data)), end='\n')
     return data
