@@ -52,7 +52,6 @@ class PairBasicGenerator(object):
 
     def make_pair_iter(self, rel):
         rel_set = {}
-        pair_list = []
         for label, d1, d2 in rel:
             if d1 not in rel_set:
                 rel_set[d1] = {}
@@ -61,6 +60,7 @@ class PairBasicGenerator(object):
             rel_set[d1][label].append(d2)
 
         while True:
+            pair_list = []
             rel_set_sample = random.sample(rel_set.keys(), self.config['query_per_iter'])
             for d1 in rel_set_sample:
                 label_list = sorted(rel_set[d1].keys(), reverse = True)

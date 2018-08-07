@@ -149,6 +149,7 @@ def train(config):
             history = model.fit_generator(
                     genfun,
                     steps_per_epoch = display_interval,
+                    shuffle=False,
                     epochs = 1,
                     verbose = 0
                 ) #callbacks=[eval_map])
@@ -178,7 +179,7 @@ def train(config):
             sys.stdout.flush()
         if (i_e+1) % save_weights_iters == 0:
             model.save_weights(weights_file % (i_e+1))
-            model.save(weights_file % (i_e+1)+".model")
+            #model.save(weights_file % (i_e+1)+".model")
 def predict(config):
     ######## Read input config ########
 
