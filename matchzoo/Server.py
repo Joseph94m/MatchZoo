@@ -123,21 +123,34 @@ def predict(config):
     print("Program is now ready for predictions")
     while True:
         data, addr = sock.recvfrom(50000) # buffer size is 1024 bytes
-        print ("received message:", data.decode())
+        data_string=str(data.decode())
+        list_data=data_string.split("\n")
+        list_list_data=[]
+        for d in list_data:
+            d_stripped=d.split(" ")
+            if(len(d_stripped)>2):
+                list_list_data.append((d_stripped[0],d_stripped[1],d_stripped[2]))
+            for tag, conf in input_predict_conf.items():
+                generator = inputs.get(conf['input_type'])
+                predict_gen[tag] = generator(
+                                    #data1 = dataset[conf['text1_corpus']],
+                                    #data2 = dataset[conf['text2_corpus']],
+                                     config = conf ,rel_data=list_list_data)
         print(addr)
-        #y_pred = model.predict(data.decode(),1)
-        print("Sending message")
-        message=""
-        for i in range(0,999):
-            message=message+" 1"
-        sendSock.sendto(message.encode(),(addr[0],addr[1]))
+        for tag, generator in predict_gen.items():
+            genfun = generator.get_batch_generator()
+            for input_data, y_true in genfun:
+                y_pred = model.predict(input_data, batch_size=len(y_true) )
+                print("Sending message")
+                message = " ".join(map(str,y_pred.tolist()))
+                sendSock.sendto(message.encode(),(addr[0],addr[1]))
         
         if interrupted:
             print("Interrupt signal received")
             sock.close()
             break
 
-
+        
 
 def main(argv):
     print("Server started")

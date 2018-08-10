@@ -10,11 +10,14 @@ from layers import DynamicMaxPooling
 import scipy.sparse as sp
 
 class PairBasicGenerator(object):
-    def __init__(self, config):
+    def __init__(self, config, rel_data = None):
         self.__name = 'PairBasicGenerator'
         self.config = config
         rel_file = config['relation_file']
-        self.rel = read_relation(filename=rel_file)
+        if (red_data):
+            self.rel = read_relation(filename=rel_file)
+        else:
+            self.red=rel_data
         self.batch_size = config['batch_size']
         self.check_list = ['relation_file', 'batch_size']
         self.point = 0

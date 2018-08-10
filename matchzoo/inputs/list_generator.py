@@ -10,11 +10,18 @@ from layers import DynamicMaxPooling
 import scipy.sparse as sp
 
 class ListBasicGenerator(object):
-    def __init__(self, config={}):
+    def __init__(self, config={}, rel_data=None):
         self.__name = 'ListBasicGenerator'
         self.config = config
         self.batch_list = config['batch_list']
-        if 'relation_file' in config:
+        if rel_data:
+            #print(rel_data)
+            #print(len(rel_data))
+            #print(len(rel_data[0]))
+            self.rel=rel_data
+            self.list_list = self.make_list(self.rel)
+            self.num_list = len(self.list_list)
+        else:
             self.rel = read_relation(filename=config['relation_file'])
             self.list_list = self.make_list(self.rel)
             self.num_list = len(self.list_list)
@@ -51,8 +58,8 @@ class ListBasicGenerator(object):
     def get_all_data(self):
         pass
 class ListGenerator(ListBasicGenerator):
-    def __init__(self, config={}):
-        super(ListGenerator, self).__init__(config=config)
+    def __init__(self, config={}, rel_data=None):
+        super(ListGenerator, self).__init__(config=config, rel_data=rel_data)
         self.__name = 'ListGenerator'
         self.data1 = config['data1']
         self.data2 = config['data2']
