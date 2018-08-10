@@ -82,33 +82,10 @@ def predict(config):
             input_predict_conf[tag].update(input_conf[tag])
     print('[Input] Process Input Tags. %s in PREDICT.' % (input_predict_conf.keys()), end='\n')
         # collect dataset identification
-    dataset = {}
-    for tag in input_conf:
-        if tag == 'share' or input_conf[tag]['phase'] == 'PREDICT':
-            if 'text1_corpus' in input_conf[tag]:
-                datapath = input_conf[tag]['text1_corpus']
-                if datapath not in dataset:
-                    dataset[datapath], _ = read_data(datapath)
-            if 'text2_corpus' in input_conf[tag]:
-                datapath = input_conf[tag]['text2_corpus']
-                if datapath not in dataset:
-                    dataset[datapath], _ = read_data(datapath)
-    print('[Dataset] %s Dataset Load Done.' % len(dataset), end='\n')
-        # initial data generator
-    predict_gen = OrderedDict()
-
-    for tag, conf in input_predict_conf.items():
-        print(conf, end='\n')
-        conf['data1'] = dataset[conf['text1_corpus']]
-        conf['data2'] = dataset[conf['text2_corpus']]
-        generator = inputs.get(conf['input_type'])
-        predict_gen[tag] = generator(
-                                    #data1 = dataset[conf['text1_corpus']],
-                                    #data2 = dataset[conf['text2_corpus']],
-                                     config = conf )
-        ######## Read output config ########
+    
+    
     output_conf = config['outputs']
-
+    
     ######## Load Model ########
     global_conf = config["global"]
     weights_file = str(global_conf['weights_file']) + '.' + str(global_conf['test_weights_iters'])
@@ -131,13 +108,39 @@ def predict(config):
             d_stripped=d.split(" ")
             if(len(d_stripped)>2):
                 list_list_data.append((d_stripped[0],d_stripped[1],d_stripped[2]))
-            for tag, conf in input_predict_conf.items():
-                generator = inputs.get(conf['input_type'])
-                predict_gen[tag] = generator(
+                
+        qData, ad = sock.recvfrom(1000) 
+        qData_string=str(qData.decode())
+        list_qData=qData_string.split("\n")
+        list_list_dData={}
+        dataset={}
+        for d in list_qData:
+            line=d.strip().split()
+            tid=line[0]
+            list_list_dData[tid]=list(map(int,line[2:])) 
+        dataset['querydata']=list_list_dData
+        dData, ad = sock.recvfrom(100000) 
+        dData_string=str(dData.decode())
+        list_dData=dData_string.split("\n")
+        list_list_dData={}
+        for d in list_dData:
+            line=d.strip().split()
+            tid=line[0]
+            list_list_dData[tid]=list(map(int,line[2:])) 
+        
+        
+        dataset['documentdata']= list_list_dData
+        predict_gen = OrderedDict()
+        for tag, conf in input_predict_conf.items():
+            conf['data1'] = dataset['documentdata']
+            conf['data2'] = dataset['querydata']
+            generator = inputs.get(conf['input_type'])
+            predict_gen[tag] = generator(
                                     #data1 = dataset[conf['text1_corpus']],
                                     #data2 = dataset[conf['text2_corpus']],
                                      config = conf ,rel_data=list_list_data)
-        print(addr)
+        dataset={}
+
         for tag, generator in predict_gen.items():
             genfun = generator.get_batch_generator()
             for input_data, y_true in genfun:
