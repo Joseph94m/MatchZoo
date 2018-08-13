@@ -14,7 +14,7 @@ class PairBasicGenerator(object):
         self.__name = 'PairBasicGenerator'
         self.config = config
         rel_file = config['relation_file']
-        if (red_data):
+        if (not rel_data):
             self.rel = read_relation(filename=rel_file)
         else:
             self.red=rel_data

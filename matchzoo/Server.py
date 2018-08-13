@@ -108,20 +108,27 @@ def predict(config):
             d_stripped=d.split(" ")
             if(len(d_stripped)>2):
                 list_list_data.append((d_stripped[0],d_stripped[1],d_stripped[2]))
-                
+         
+        sendSock.sendto(" ".encode(),(addr[0],addr[1]))
         qData, ad = sock.recvfrom(1000) 
         qData_string=str(qData.decode())
         list_qData=qData_string.split("\n")
-        list_list_dData={}
+        list_list_qData={}
         dataset={}
         for d in list_qData:
             line=d.strip().split()
             tid=line[0]
-            list_list_dData[tid]=list(map(int,line[2:])) 
-        dataset['querydata']=list_list_dData
-        dData, ad = sock.recvfrom(100000) 
-        dData_string=str(dData.decode())
-        list_dData=dData_string.split("\n")
+            list_list_qData[tid]=list(map(int,line[2:])) 
+        dataset['querydata']=list_list_qData
+        sendSock.sendto(" ".encode(),(addr[0],addr[1]))
+        sizeData, ad = sock.recvfrom(50)
+        sizeData_int = int(sizeData.decode())
+        list_dData=[]
+        for i in range(0,sizeData_int):
+            sendSock.sendto(" ".encode(),(addr[0],addr[1]))
+            dData, ad = sock.recvfrom(50000) 
+            dData_string=str(dData.decode())
+            list_dData.append(dData_string)
         list_list_dData={}
         for d in list_dData:
             line=d.strip().split()
@@ -132,8 +139,8 @@ def predict(config):
         dataset['documentdata']= list_list_dData
         predict_gen = OrderedDict()
         for tag, conf in input_predict_conf.items():
-            conf['data1'] = dataset['documentdata']
-            conf['data2'] = dataset['querydata']
+            conf['data2'] = dataset['documentdata']
+            conf['data1'] = dataset['querydata']
             generator = inputs.get(conf['input_type'])
             predict_gen[tag] = generator(
                                     #data1 = dataset[conf['text1_corpus']],
@@ -146,8 +153,12 @@ def predict(config):
             for input_data, y_true in genfun:
                 y_pred = model.predict(input_data, batch_size=len(y_true) )
                 print("Sending message")
+               
                 message = " ".join(map(str,y_pred.tolist()))
-                sendSock.sendto(message.encode(),(addr[0],addr[1]))
+                #print(sys.getsizeof(message))
+                #print(message)
+                #sendSock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 4112)  # Buffer size 8192
+                zab = sendSock.sendto(message.encode(),(addr[0],addr[1]))
         
         if interrupted:
             print("Interrupt signal received")
