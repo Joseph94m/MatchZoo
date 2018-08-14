@@ -61,17 +61,17 @@ python matchzoo\main.py --phase predict --model_file examples/wikiqa/config/drmm
 
 python matchzoo\main.py --phase train --model_file examples/Robust/config/arcii_Robust.config
 python matchzoo\main.py --phase predict --model_file examples/Robust/config/arcii_Robust.config > arcii.predict //out of memory -> cut relation
-
 python matchzoo\main.py --phase train --model_file examples/Robust/config/drmm_tks_Robust.config
-python matchzoo\main.py --phase train --model_file examples/Robust/config/drmm_Robust.config
 python matchzoo\main.py --phase train --model_file examples/Robust/config/knrm_Robust.config
-
-python matchzoo\main.py --phase train --model_file examples/Robust/config/anmm_Robust.config
-python matchzoo\main.py --phase train --model_file examples/Robust/config/duet_Robust.config
 python matchzoo\main.py --phase train --model_file examples/Robust/config/arci_Robust.config
-python matchzoo\main.py --phase train --model_file examples/Robust/config/mvlstm_Robust.config
-python matchzoo\main.py --phase train --model_file examples/Robust/config/nmws_Robust.config
+
 python matchzoo\main.py --phase train --model_file examples/Robust/config/cdssm_Robust.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/anmm_Robust.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/drmm_Robust.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/duet_Robust.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/nmws_Robust.config
+python matchzoo\main.py --phase train --model_file examples/Robust/config/mvlstm_Robust.config
+
 
 
 python matchzoo\main.py --phase predict --model_file examples/Robust/config/drmm_Robust.config > drmm.predict
