@@ -95,13 +95,13 @@ def predict(config):
     sock = socket.socket(socket.AF_INET, # Internet
                           socket.SOCK_DGRAM) # UDP
     sock.bind((UDP_IP, UDP_PORT))
-    
+    ENCODING='UTF-8'
     interrupted = False 
     sendSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
     print("Program is now ready for predictions")
     while True:
         data, addr = sock.recvfrom(50000) # buffer size is 50000 bytes
-        data_string=str(data.decode('ISO-8859-1'))
+        data_string=str(data.decode(ENCODING))
         list_data=data_string.split("\n")
         list_list_data=[]
         for d in list_data:
@@ -109,9 +109,9 @@ def predict(config):
             if(len(d_stripped)>2):
                 list_list_data.append((d_stripped[0],d_stripped[1],d_stripped[2]))
          
-        sendSock.sendto(" ".encode('ISO-8859-1'),(addr[0],addr[1]))
+        sendSock.sendto(" ".encode(ENCODING),(addr[0],addr[1]))
         qData, ad = sock.recvfrom(1000) 
-        qData_string=str(qData.decode('ISO-8859-1'))
+        qData_string=str(qData.decode(ENCODING))
         list_qData=qData_string.split("\n")
         list_list_qData={}
         dataset={}
@@ -120,14 +120,14 @@ def predict(config):
             tid=line[0]
             list_list_qData[tid]=list(map(int,line[2:])) 
         dataset['querydata']=list_list_qData
-        sendSock.sendto(" ".encode('ISO-8859-1'),(addr[0],addr[1]))
+        sendSock.sendto(" ".encode(ENCODING),(addr[0],addr[1]))
         sizeData, ad = sock.recvfrom(50)
-        sizeData_int = int(sizeData.decode('ISO-8859-1'))
+        sizeData_int = int(sizeData.decode(ENCODING))
         list_dData=[]
         for i in range(0,sizeData_int):
-            sendSock.sendto(" ".encode('ISO-8859-1'),(addr[0],addr[1]))
+            sendSock.sendto(" ".encode(ENCODING),(addr[0],addr[1]))
             dData, ad = sock.recvfrom(50000) 
-            dData_string=str(dData.decode('ISO-8859-1'))
+            dData_string=str(dData.decode(ENCODING))
             list_dData.append(dData_string)
         list_list_dData={}
         for d in list_dData:
@@ -158,7 +158,7 @@ def predict(config):
                 #print(sys.getsizeof(message))
                 #print(message)
                 #sendSock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 4112)  # Buffer size 8192
-                zab = sendSock.sendto(message.encode('ISO-8859-1'),(addr[0],addr[1]))
+                zab = sendSock.sendto(message.encode(ENCODING),(addr[0],addr[1]))
         
         if interrupted:
             print("Interrupt signal received")
