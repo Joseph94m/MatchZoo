@@ -105,16 +105,19 @@ def predict(config):
         sock.listen(1)
 
         conn, addr = sock.accept()
-        data = conn.recv(50000)
-        data_string=str(data.decode(ENCODING))
-        list_data=data_string.split("\n")
-        list_list_data=[]
-        for d in list_data:
-            d_stripped=d.split(" ")
-            if(len(d_stripped)>2):
-                list_list_data.append((d_stripped[0],d_stripped[1],d_stripped[2]))
-         
+        numberOfMessages=conn.recv(64)
+        numberOfMessages=int(numberOfMessages)
         conn.send("\n".encode(ENCODING))
+        list_list_data=[]
+        for i in range(0,numberOfMessages):
+            data = conn.recv(50000)
+            data_string=str(data.decode(ENCODING))
+            list_data=data_string.split("\n")
+            for d in list_data:
+                d_stripped=d.split(" ")
+                if(len(d_stripped)>2):
+                    list_list_data.append((d_stripped[0],d_stripped[1],d_stripped[2]))
+            conn.send("\n".encode(ENCODING))
         qData = conn.recv(1000) 
         qData_string=str(qData.decode(ENCODING))
         list_qData=qData_string.split("\n")
