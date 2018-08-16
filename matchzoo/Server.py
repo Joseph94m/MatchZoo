@@ -97,14 +97,15 @@ def predict(config):
     sock.bind((TCP_IP, TCP_PORT))
 
     
-    interrupted = False 
-    print("Program is now ready for predictions")
-    sock.listen(1)
+   
+    
+    print("Program is now ready for predictions")    
     
     while True:
+        sock.listen(1)
+
         conn, addr = sock.accept()
         data = conn.recv(50000)
-        print("receive 1")
         data_string=str(data.decode(ENCODING))
         list_data=data_string.split("\n")
         list_list_data=[]
@@ -166,10 +167,7 @@ def predict(config):
                 #sendSock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 4112)  # Buffer size 8192
                 conn.send(message.encode(ENCODING))
         
-        if interrupted:
-            print("Interrupt signal received")
-            sock.close()
-            break
+        
 
         
 
